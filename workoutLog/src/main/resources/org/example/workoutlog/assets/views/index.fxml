@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.PasswordField?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.workoutlog.controllers.IndexController">
    <children>
@@ -12,13 +13,13 @@
          <font>
             <Font size="19.0" />
          </font></Label>
-      <TextField layoutX="577.0" layoutY="336.0" prefHeight="32.0" prefWidth="358.0" />
+      <TextField fx:id="usernameField" layoutX="577.0" layoutY="336.0" prefHeight="32.0" prefWidth="358.0" />
       <Label layoutX="564.0" layoutY="68.0" prefHeight="106.0" prefWidth="383.0" text="Workout Log" textAlignment="CENTER">
          <font>
             <Font size="65.0" />
          </font></Label>
-      <TextField layoutX="577.0" layoutY="416.0" prefHeight="32.0" prefWidth="358.0" />
-      <Button fx:id="login" layoutX="671.0" layoutY="488.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="158.0" text="Log in" onAction="#login"/>
+      <PasswordField fx:id="passwordField" layoutX="577.0" layoutY="416.0" prefHeight="32.0" prefWidth="358.0" />
+      <Button fx:id="login" layoutX="671.0" layoutY="488.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="158.0" text="Log in" />
       <Label layoutX="576.0" layoutY="304.0" prefHeight="32.0" prefWidth="348.0" text="username :" textAlignment="CENTER">
          <font>
             <Font size="19.0" />
