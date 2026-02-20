@@ -12,12 +12,22 @@ import org.example.workoutlog.dao.UserDAO;
 import org.example.workoutlog.dao.WorkoutDAO;
 import org.example.workoutlog.dao.WorkoutExerciseDAO;
 import org.example.workoutlog.dao.WorkoutSetDAO;
-import org.example.workoutlog.model.*;
-import org.example.workoutlog.utils.TableUtils;
+import org.example.workoutlog.model.Category;
+import org.example.workoutlog.model.Exercise;
+import org.example.workoutlog.model.MuscleGroup;
+import org.example.workoutlog.model.Program;
+import org.example.workoutlog.model.SetTemplate;
+import org.example.workoutlog.model.User;
+import org.example.workoutlog.model.Workout;
+import org.example.workoutlog.model.WorkoutExercise;
+import org.example.workoutlog.model.WorkoutSet;
 import org.example.workoutlog.utils.Add.AddDialogUtils;
 import org.example.workoutlog.utils.Add.AddUtils;
+import org.example.workoutlog.utils.Delete.DeleteDialogUtils;
+import org.example.workoutlog.utils.Delete.DeleteUtils;
 import org.example.workoutlog.utils.Edit.EditDialogUtils;
 import org.example.workoutlog.utils.Edit.EditUtils;
+import org.example.workoutlog.utils.TableUtils;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -92,16 +102,27 @@ public class DashboardController {
         });
 
         btnEdit.setOnAction(e -> {
-        if (mainTableView != null && !mainTableView.getSelectionModel().isEmpty()) {
-            Object selected = mainTableView.getSelectionModel().getSelectedItem();
-            Object dao = daoMap.get(selected.getClass());
-            if (dao != null) {
-                Object editedItem = EditDialogUtils.editWithDialog(selected);
-                if (editedItem != null) {
-                    EditUtils.edit(dao, editedItem, mainTableView);
+            if (mainTableView != null && !mainTableView.getSelectionModel().isEmpty()) {
+                Object selected = mainTableView.getSelectionModel().getSelectedItem();
+                Object dao = daoMap.get(selected.getClass());
+                if (dao != null) {
+                    Object editedItem = EditDialogUtils.editWithDialog(selected);
+                    if (editedItem != null) {
+                        EditUtils.edit(dao, editedItem, mainTableView);
+                    }
                 }
             }
-        }
-    });
+        });
+
+        btnDelete.setOnAction(e -> {
+            if (mainTableView.getSelectionModel().getSelectedItem() != null) {
+                Object selected = mainTableView.getSelectionModel().getSelectedItem();
+                Object dao = daoMap.get(selected.getClass());
+
+                if (DeleteDialogUtils.confirmDelete(selected)) {
+                    DeleteUtils.delete(dao, selected, mainTableView);
+                }
+            }
+        });
     }
 }
