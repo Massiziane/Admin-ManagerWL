@@ -3,6 +3,7 @@ package org.example.workoutlog.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.example.workoutlog.WorkoutLog;
 import org.example.workoutlog.dao.CategoryDAO;
 import org.example.workoutlog.dao.ExerciseDAO;
 import org.example.workoutlog.dao.MuscleGroupDAO;
@@ -58,12 +59,16 @@ public class DashboardController {
     private final WorkoutExerciseDAO workoutExerciseDAO = new WorkoutExerciseDAO();
     private final WorkoutSetDAO workoutSetDAO = new WorkoutSetDAO();
 
+
     // Generic DAO map
     private Map<Class<?>, Object> daoMap;
     
 
     @FXML
     public void initialize() {
+
+        logoutButton.setOnAction(e -> logout());
+
         // Attach click handlers
         btnUsers.setOnAction(e -> TableUtils.loadTable(mainTableView, userDAO.getAllUsers()));
         btnPrograms.setOnAction(e -> TableUtils.loadTable(mainTableView, programDAO.getAllPrograms()));
@@ -76,7 +81,7 @@ public class DashboardController {
         btnSetTemplates.setOnAction(e -> TableUtils.loadTable(mainTableView, setTemplateDAO.getAllSetTemplates()));
 
 
-        Map<Class<?>, Object> daoMap = new HashMap<>();
+        daoMap = new HashMap<>();
         daoMap.put(Category.class, categoryDAO);
         daoMap.put(Program.class, programDAO);
         daoMap.put(User.class, userDAO);
@@ -124,5 +129,9 @@ public class DashboardController {
                 }
             }
         });
+    }
+    
+    private void logout() {
+        WorkoutLog.changePage("/org/example/workoutlog/assets/views/index.fxml");
     }
 }

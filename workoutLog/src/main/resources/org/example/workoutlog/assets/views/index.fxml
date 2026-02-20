@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.PasswordField?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.workoutlog.controllers.IndexController">
+<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.workoutlog.controllers.IndexController" stylesheets="@../css/Index.css" styleClass="root-pane">
    <children>
       <Label layoutX="581.0" layoutY="260.0" prefHeight="32.0" prefWidth="348.0" text="Please log in  to access data managment" textAlignment="CENTER">
          <font>

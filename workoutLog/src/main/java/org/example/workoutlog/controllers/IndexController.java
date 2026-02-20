@@ -1,6 +1,8 @@
 package org.example.workoutlog.controllers;
 
 import org.example.workoutlog.WorkoutLog;
+import org.example.workoutlog.dao.UserDAO;
+import org.example.workoutlog.model.User;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -20,7 +22,10 @@ public class IndexController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if ("admin".equals(username) && "admin".equals(password)) {
+        UserDAO userDao = new UserDAO();
+        User admin = userDao.authAdmin(username, password);
+
+        if (admin != null) {
             WorkoutLog.changePage("/org/example/workoutlog/assets/views/Dashboard.fxml");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

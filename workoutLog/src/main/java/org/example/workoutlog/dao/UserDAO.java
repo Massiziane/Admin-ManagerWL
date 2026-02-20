@@ -11,6 +11,38 @@ import org.example.workoutlog.model.User;
 import org.example.workoutlog.utils.DatabaseConnection;
 
 public class UserDAO {
+    // Authenticate admin user
+    public User authAdmin(String username, String password) {
+       String sql = "SELECT * FROM \"User\" WHERE username = ? AND password = ? AND role = 'ADMIN' AND \"isActive\" = true";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new User(
+                        rs.getInt("id"),
+                        rs.getString("clerkId"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getBoolean("isActive")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null; // no match
+    }
+
      // CREATE
     public void addUser(User user) {
         String sql = """
