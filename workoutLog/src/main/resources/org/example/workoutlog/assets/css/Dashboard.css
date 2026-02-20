@@ -1,0 +1,81 @@
+/* Root pane */
+.anchor-pane {
+    -fx-background-color: #f4f4f4; /* light gray background */
+}
+
+/* Header label */
+.label {
+    -fx-text-fill: #2c3e50; /* dark gray text */
+    -fx-font-weight: bold;
+}
+
+/* Top logout button */
+#logoutButton {
+    -fx-background-color: #e74c3c; /* red */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+#logoutButton:hover {
+    -fx-background-color: #c0392b; /* darker red */
+}
+
+/* Left menu buttons (tables) */
+VBox > Button {
+    -fx-background-color: #34495e; /* dark blue/gray */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+VBox > Button:hover {
+    -fx-background-color: #2c3e50; /* darker shade */
+}
+
+/* CRUD buttons (ADD, EDIT, DELETE) */
+HBox > Button {
+    -fx-background-color: #27ae60; /* green */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+HBox > Button:hover {
+    -fx-background-color: #219150; /* darker green */
+}
+
+/* TableView styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7; /* light border */
+    -fx-border-width: 1;
+    -fx-table-cell-border-color: #ecf0f1;
+    -fx-font-size: 14px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #3498db; /* blue headers */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #3498db;
+}
+
+.table-view .table-row-cell:filled:selected, 
+.table-view .table-row-cell:focused:selected {
+    -fx-background-color: #d1f2eb; /* light teal for selected row */
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #ecf0f1; /* light hover effect */
+}
