@@ -36,7 +36,7 @@ public class CategoryDAO {
 
     
     // 🔹 CREATE
-    public void add(Category category) {
+    public void addCategory(Category category) {
         String sql = "INSERT INTO \"Category\" (name, Desc) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -51,7 +51,7 @@ public class CategoryDAO {
     }
 
     // 🔹 UPDATE
-    public void update(Category category) {
+    public void updateCategory(Category category) {
         String sql = "UPDATE \"Category\" SET name = ?, Desc = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -66,7 +66,7 @@ public class CategoryDAO {
         }
     }
 
-    public void delete(int id) {
+    public void deleteCategory(int id) {
         String sql = "DELETE FROM \"Category\" WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
