@@ -15,7 +15,7 @@ public class ProgramDAO {
 
     // 🔹 CREATE
     public void addProgram(Program program) {
-        String sql = "INSERT INTO \"Program\" (name, Desc, userId) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO \"Program\" (name, \"Desc\", \"userId\", \"updatedAt\") VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -83,8 +83,7 @@ public class ProgramDAO {
 
     // 🔹 UPDATE
     public void updateProgram(Program program) {
-        String sql = "UPDATE \"Program\" SET name = ?, Desc = ?, userId = ? WHERE id = ?";
-
+        String sql = "UPDATE \"Program\" SET name = ?, \"Desc\" = ?, \"userId\" = ?, \"updatedAt\" = CURRENT_TIMESTAMP WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

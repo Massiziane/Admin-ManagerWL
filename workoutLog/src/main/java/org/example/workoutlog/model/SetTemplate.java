@@ -8,6 +8,8 @@ public class SetTemplate {
     private Integer restTime;
     private String type;
 
+    public SetTemplate() {}
+
     public SetTemplate(int id, Integer reps, Double weight,
                        String tempo, Integer restTime, String type) {
         this.id = id;

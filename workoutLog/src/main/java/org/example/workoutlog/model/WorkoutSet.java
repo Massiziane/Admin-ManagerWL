@@ -11,6 +11,8 @@ public class WorkoutSet {
     private String tempo;
     private Integer restTime;
 
+    public WorkoutSet() {}
+
     public WorkoutSet(int id, Integer order, Integer setNumber,
                       int workoutExerciseId, Integer setTemplateId,
                       Integer reps, Double weight,

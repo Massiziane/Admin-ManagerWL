@@ -1,5 +1,8 @@
 package org.example.workoutlog.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.example.workoutlog.dao.CategoryDAO;
 import org.example.workoutlog.dao.ExerciseDAO;
 import org.example.workoutlog.dao.MuscleGroupDAO;
@@ -9,7 +12,10 @@ import org.example.workoutlog.dao.UserDAO;
 import org.example.workoutlog.dao.WorkoutDAO;
 import org.example.workoutlog.dao.WorkoutExerciseDAO;
 import org.example.workoutlog.dao.WorkoutSetDAO;
+import org.example.workoutlog.model.*;
 import org.example.workoutlog.utils.TableUtils;
+import org.example.workoutlog.utils.Add.AddDialogUtils;
+import org.example.workoutlog.utils.Add.AddUtils;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,6 +45,9 @@ public class DashboardController {
     private final SetTemplateDAO setTemplateDAO = new SetTemplateDAO();
     private final WorkoutExerciseDAO workoutExerciseDAO = new WorkoutExerciseDAO();
     private final WorkoutSetDAO workoutSetDAO = new WorkoutSetDAO();
+
+    // Generic DAO map
+    private Map<Class<?>, Object> daoMap;
     
 
     @FXML
@@ -53,5 +62,31 @@ public class DashboardController {
         btnCategories.setOnAction(e -> TableUtils.loadTable(mainTableView, categoryDAO.getAllCategories()));
         btnMuscleGroups.setOnAction(e -> TableUtils.loadTable(mainTableView, muscleGroupDAO.getAllMuscleGroups()));
         btnSetTemplates.setOnAction(e -> TableUtils.loadTable(mainTableView, setTemplateDAO.getAllSetTemplates()));
+
+
+        Map<Class<?>, Object> daoMap = new HashMap<>();
+        daoMap.put(Category.class, categoryDAO);
+        daoMap.put(Program.class, programDAO);
+        daoMap.put(User.class, userDAO);
+        daoMap.put(Workout.class, workoutDAO);
+        daoMap.put(Exercise.class, exerciseDAO);
+        daoMap.put(MuscleGroup.class, muscleGroupDAO);
+        daoMap.put(SetTemplate.class, setTemplateDAO);
+        daoMap.put(WorkoutExercise.class, workoutExerciseDAO);
+        daoMap.put(WorkoutSet.class, workoutSetDAO);
+        
+        
+        btnAdd.setOnAction(e -> {
+            if (mainTableView != null && !mainTableView.getItems().isEmpty()) {
+                Class<?> clazz = mainTableView.getItems().get(0).getClass();
+                Object dao = daoMap.get(clazz);
+                if (dao != null) {
+                    Object newItem = AddDialogUtils.addWithDialog(clazz);
+                    if (newItem != null) {
+                        AddUtils.add(dao, newItem, mainTableView);
+                    }
+                }
+            }
+        });
     }
 }

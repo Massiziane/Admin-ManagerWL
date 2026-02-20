@@ -6,6 +6,8 @@ public class Program {
     private String desc;
     private int userId;
 
+    public Program() {}
+
     public Program(int id, String name, String desc, int userId) {
         this.id = id;
         this.name = name;

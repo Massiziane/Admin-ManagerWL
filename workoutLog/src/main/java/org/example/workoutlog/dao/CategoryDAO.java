@@ -37,7 +37,7 @@ public class CategoryDAO {
     
     // 🔹 CREATE
     public void addCategory(Category category) {
-        String sql = "INSERT INTO \"Category\" (name, Desc) VALUES (?, ?)";
+        String sql = "INSERT INTO \"Category\" (name, \"Desc\") VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
