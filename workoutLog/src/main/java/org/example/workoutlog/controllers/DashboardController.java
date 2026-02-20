@@ -16,6 +16,8 @@ import org.example.workoutlog.model.*;
 import org.example.workoutlog.utils.TableUtils;
 import org.example.workoutlog.utils.Add.AddDialogUtils;
 import org.example.workoutlog.utils.Add.AddUtils;
+import org.example.workoutlog.utils.Edit.EditDialogUtils;
+import org.example.workoutlog.utils.Edit.EditUtils;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -88,5 +90,18 @@ public class DashboardController {
                 }
             }
         });
+
+        btnEdit.setOnAction(e -> {
+        if (mainTableView != null && !mainTableView.getSelectionModel().isEmpty()) {
+            Object selected = mainTableView.getSelectionModel().getSelectedItem();
+            Object dao = daoMap.get(selected.getClass());
+            if (dao != null) {
+                Object editedItem = EditDialogUtils.editWithDialog(selected);
+                if (editedItem != null) {
+                    EditUtils.edit(dao, editedItem, mainTableView);
+                }
+            }
+        }
+    });
     }
 }
