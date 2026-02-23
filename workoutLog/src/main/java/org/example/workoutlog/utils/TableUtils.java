@@ -29,7 +29,7 @@ public class TableUtils {
         }
 
         if (items.isEmpty()) {
-            Label placeholder = new Label("No data in the DB for this table.");
+            Label placeholder = new Label("No data in this table.");
             placeholder.setStyle("-fx-text-fill: #333333; -fx-font-size: 16px; -fx-font-weight: bold;");
             placeholder.setMaxWidth(Double.MAX_VALUE);
             placeholder.setWrapText(true);

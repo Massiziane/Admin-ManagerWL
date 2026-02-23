@@ -223,3 +223,29 @@
     -fx-background-radius: 5px;
     -fx-flex-align: center;
 }
+
+/* Help button styling */
+#helpBtn {
+    -fx-background-color: #4a90e2;   
+    -fx-text-fill: white;           
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 8 20 8 20;        
+    -fx-background-radius: 8px;    
+    -fx-cursor: hand;              
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2); 
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect */
+#helpBtn:hover {
+    -fx-background-color: #357ab8; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 3);
+}
+
+/* Pressed effect */
+#helpBtn:pressed {
+    -fx-background-color: #2c5d91;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}

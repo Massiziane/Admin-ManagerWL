@@ -59,6 +59,7 @@
                     <Button fx:id="btnEdit" text="Edit" />
                     <Button fx:id="btnDelete" text="Delete" />
                     <Label fx:id="tableShown" prefHeight="37.0" prefWidth="337.0" text="Table : " />
+                    <Button fx:id="helpBtn" text="help" />
                 </children>
             </HBox>
 

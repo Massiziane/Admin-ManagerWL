@@ -31,10 +31,14 @@ import org.example.workoutlog.utils.Edit.EditUtils;
 import org.example.workoutlog.utils.TableUtils;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * Controller class for the Dashboard view.
@@ -50,7 +54,8 @@ public class DashboardController {
 
     // Buttons for navigation and CRUD actions
     @FXML private Button logoutButton;
-    @FXML private Button btnAdd, btnEdit, btnDelete;
+    @FXML private Button btnAdd, btnEdit, btnDelete, helpBtn;
+
 
     // Buttons for switching between data tables
     @FXML private Button btnUsers, btnPrograms, btnWorkouts, btnExercises,
@@ -74,6 +79,8 @@ public class DashboardController {
     private final WorkoutExerciseDAO workoutExerciseDAO = new WorkoutExerciseDAO();
     private final WorkoutSetDAO workoutSetDAO = new WorkoutSetDAO();
 
+
+
     // Map storing correspondence between model classes and their DAO objects
     private Map<Class<?>, Object> daoMap;
 
@@ -89,6 +96,9 @@ public class DashboardController {
 
         // Handles logout button click
         logoutButton.setOnAction(e -> logout());
+
+        // Handles help button click
+        helpBtn.setOnAction(e -> showAdminHelp());
 
         // Bind each menu button to its corresponding DAO retrieval & table load
         btnUsers.setOnAction(e -> { 
@@ -215,5 +225,18 @@ public class DashboardController {
      */
     private void logout() {
         WorkoutLog.changePage("/org/example/workoutlog/assets/views/index.fxml");
+    }
+
+    private void showAdminHelp() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/workoutlog/assets/views/help.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Admin Guidance");
+            stage.initModality(Modality.APPLICATION_MODAL); // Blocks interaction with main window
+            stage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
