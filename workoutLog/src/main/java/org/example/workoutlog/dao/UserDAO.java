@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.User;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 
 public class UserDAO {
     // Authenticate admin user
@@ -103,7 +103,7 @@ public class UserDAO {
     //  UPDATE
     public void updateUser(User user) {
         String sql = """
-            UPDATE "User"
+            UPDATE \"User\"
             SET firstName = ?, lastName = ?, username = ?, 
                 email = ?, role = ?, isActive = ?
             WHERE id = ?

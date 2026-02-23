@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.Category;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 public class CategoryDAO {
 
     public List<Category> getAllCategories() {
@@ -52,7 +52,7 @@ public class CategoryDAO {
 
     // 🔹 UPDATE
     public void updateCategory(Category category) {
-        String sql = "UPDATE \"Category\" SET name = ?, Desc = ? WHERE id = ?";
+        String sql = "UPDATE \"Category\" SET name = ?, \"Desc\" = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -67,12 +67,26 @@ public class CategoryDAO {
     }
 
     public void deleteCategory(int id) {
-        String sql = "DELETE FROM \"Category\" WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        // Set the fallback category ID (the one named "Exercises")
+        final int fallbackCategoryId = 28; // <-- id of the fallback category
 
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+        String updateSql = "UPDATE \"Exercise\" SET \"categoryId\" = ? WHERE \"categoryId\" = ?";
+        String deleteSql = "DELETE FROM \"Category\" WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+
+            //  Reassigns exercises to fallback category
+            try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                updateStmt.setInt(1, fallbackCategoryId);
+                updateStmt.setInt(2, id);
+                updateStmt.executeUpdate();
+            }
+
+            // 2Delete the category
+            try (PreparedStatement deleteStmt = conn.prepareStatement(deleteSql)) {
+                deleteStmt.setInt(1, id);
+                deleteStmt.executeUpdate();
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.WorkoutExercise;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 
 public class WorkoutExerciseDAO {
 

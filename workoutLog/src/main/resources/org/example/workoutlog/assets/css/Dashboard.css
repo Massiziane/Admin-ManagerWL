@@ -7,7 +7,7 @@
 /* ================= HEADER ================= */
 
 #headerBar {
-    -fx-background-color: linear-gradient(to right, #1e3c72, #2a5298);
+    -fx-background-color: linear-gradient(to right, #0b1b38, #2a5298);
     -fx-padding: 20;
     -fx-alignment: CENTER_LEFT;
 }
@@ -43,14 +43,16 @@
 
 /* Sidebar title */
 .sidebar-title {
-    -fx-text-fill: white;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+    -fx-text-fill: rgb(216, 215, 215);
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-size: 35px;
+    -fx-font-weight: bolder;
+    -ms-flex-align: center;
 }
 
 /* Sidebar buttons */
 #sideBar .button {
-    -fx-background-color: transparent;
+    -fx-background-color: #2557b3;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-background-radius: 6;
@@ -59,7 +61,7 @@
 }
 
 #sideBar .button:hover {
-    -fx-background-color: rgba(255,255,255,0.15);
+    -fx-background-color: rgba(3, 24, 56, 0.15);
 }
 
 /* ================= CONTENT AREA ================= */
@@ -199,4 +201,25 @@
 #mainTableView:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+}
+/* Table label above table */
+#tableShown {
+    -fx-text-fill: black;  
+    -fx-font-size: 18px;     
+    -fx-font-weight: bold;      
+    -fx-background-color: #f0f0f0; 
+    -fx-padding: 6px 10px;      
+    -fx-border-color: #ccc;  
+    -fx-border-radius: 5px;   
+    -fx-background-radius: 5px;
+}
+#tabletitle {
+    -fx-font-size: 24px;     
+    -fx-font-weight: bold;      
+    -fx-background-color: #f0f0f0; 
+    -fx-padding: 6px 10px;      
+    -fx-border-color: #ccc;  
+    -fx-border-radius: 5px;   
+    -fx-background-radius: 5px;
+    -fx-flex-align: center;
 }

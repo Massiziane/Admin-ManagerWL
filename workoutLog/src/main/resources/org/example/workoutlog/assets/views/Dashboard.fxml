@@ -4,30 +4,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="800.0" prefWidth="1500.0"
-            stylesheets="@../css/Dashboard.css"
-            xmlns="http://javafx.com/javafx/25"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.workoutlog.controllers.DashboardController">
+<BorderPane prefHeight="800.0" prefWidth="1500.0" stylesheets="@../css/Dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.workoutlog.controllers.DashboardController">
 
     <!-- ================= HEADER ================= -->
     <top>
         <HBox fx:id="headerBar" alignment="CENTER_LEFT" spacing="20">
             <children>
-                <Label text="Workout Log DATA Manager">
-                    <font>
-                        <Font size="36.0"/>
-                    </font>
-                </Label>
 
-                <HBox HBox.hgrow="ALWAYS"/>
+                <HBox HBox.hgrow="ALWAYS">
+               <children>
+                      <Label text="Workout Log : DATA Manager">
+                          <font>
+                              <Font size="36.0" />
+                          </font>
+                      </Label>
+               </children></HBox>
 
-                <Button fx:id="logoutButton" text="Log out"/>
+                <Button fx:id="logoutButton" text="Log out" />
             </children>
         </HBox>
     </top>
@@ -36,17 +33,17 @@
     <left>
         <VBox fx:id="sideBar" spacing="10">
             <children>
-                <Label text="Tables" styleClass="sidebar-title"/>
+                <Label prefHeight="55.0" prefWidth="180.0" styleClass="sidebar-title" text="Tables" />
 
-                <Button fx:id="btnUsers" text="Users"/>
-                <Button fx:id="btnPrograms" text="Programs"/>
-                <Button fx:id="btnWorkouts" text="Workouts"/>
-                <Button fx:id="btnExercises" text="Exercises"/>
-                <Button fx:id="btnCategories" text="Categories"/>
-                <Button fx:id="btnMuscleGroups" text="Muscle Groups"/>
-                <Button fx:id="btnSetTemplates" text="Set Templates"/>
-                <Button fx:id="btnWorkoutExercises" text="Workout Exercises"/>
-                <Button fx:id="btnWorkoutSets" text="Workout Sets"/>
+                <Button fx:id="btnUsers" prefHeight="40.0" prefWidth="180.0" text="Users" />
+                <Button fx:id="btnPrograms" prefHeight="40.0" prefWidth="180.0" text="Programs" />
+                <Button fx:id="btnWorkouts" prefHeight="40.0" prefWidth="180.0" text="Workouts" />
+                <Button fx:id="btnExercises" prefHeight="40.0" prefWidth="180.0" text="Exercises" />
+                <Button fx:id="btnCategories" prefHeight="40.0" prefWidth="180.0" text="Categories" />
+                <Button fx:id="btnMuscleGroups" prefHeight="40.0" prefWidth="180.0" text="Muscle Groups" />
+                <Button fx:id="btnSetTemplates" prefHeight="40.0" prefWidth="180.0" text="Set Templates" />
+                <Button fx:id="btnWorkoutExercises" prefHeight="40.0" prefWidth="180.0" text="Workout Exercises" />
+                <Button fx:id="btnWorkoutSets" prefHeight="40.0" prefWidth="180.0" text="Workout Sets" />
             </children>
         </VBox>
     </left>
@@ -58,14 +55,15 @@
             <!-- Action bar -->
             <HBox fx:id="actionBar" spacing="15">
                 <children>
-                    <Button fx:id="btnAdd" text="Add"/>
-                    <Button fx:id="btnEdit" text="Edit"/>
-                    <Button fx:id="btnDelete" text="Delete"/>
+                    <Button fx:id="btnAdd" text="Add" />
+                    <Button fx:id="btnEdit" text="Edit" />
+                    <Button fx:id="btnDelete" text="Delete" />
+                    <Label fx:id="tableShown" prefHeight="37.0" prefWidth="337.0" text="Table : " />
                 </children>
             </HBox>
 
             <!-- Dynamic Table -->
-            <TableView fx:id="mainTableView" VBox.vgrow="ALWAYS"/>
+            <TableView fx:id="mainTableView" stylesheets="@../css/dynamicTable.css" VBox.vgrow="ALWAYS" />
 
         </VBox>
     </center>

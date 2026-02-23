@@ -6,18 +6,16 @@ public class SetTemplate {
     private Double weight;
     private String tempo;
     private Integer restTime;
-    private String type;
 
     public SetTemplate() {}
 
     public SetTemplate(int id, Integer reps, Double weight,
-                       String tempo, Integer restTime, String type) {
+                       String tempo, Integer restTime) {
         this.id = id;
         this.reps = reps;
         this.weight = weight;
         this.tempo = tempo;
         this.restTime = restTime;
-        this.type = type;
     }
     // Getters
     public int getId() {
@@ -40,9 +38,7 @@ public class SetTemplate {
         return restTime;
     }
 
-    public String getType() {
-        return type;
-    }
+
 
     // Setters
     public void setId(int id) {
@@ -63,9 +59,5 @@ public class SetTemplate {
 
     public void setRestTime(Integer restTime) {
         this.restTime = restTime;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

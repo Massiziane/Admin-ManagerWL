@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.ProgramWorkout;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 public class ProgramWorkoutDAO {
 
     // 🔹 CREATE

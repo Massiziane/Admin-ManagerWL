@@ -32,6 +32,7 @@ import org.example.workoutlog.utils.TableUtils;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
@@ -48,6 +49,8 @@ public class DashboardController {
             btnWorkoutExercises, btnWorkoutSets;
 
     @FXML private TableView<Object> mainTableView;
+
+    @FXML private Label tableShown;
 
     private final UserDAO userDAO = new UserDAO();
     private final ProgramDAO programDAO = new ProgramDAO();
@@ -70,15 +73,15 @@ public class DashboardController {
         logoutButton.setOnAction(e -> logout());
 
         // Attach click handlers
-        btnUsers.setOnAction(e -> TableUtils.loadTable(mainTableView, userDAO.getAllUsers()));
-        btnPrograms.setOnAction(e -> TableUtils.loadTable(mainTableView, programDAO.getAllPrograms()));
-        btnWorkouts.setOnAction(e -> TableUtils.loadTable(mainTableView, workoutDAO.getAllWorkouts()));
-        btnWorkoutExercises.setOnAction(e -> TableUtils.loadTable(mainTableView, workoutExerciseDAO.getAllWorkoutExercises()));
-        btnWorkoutSets.setOnAction(e -> TableUtils.loadTable(mainTableView, workoutSetDAO.getAllWorkoutSets()));
-        btnExercises.setOnAction(e -> TableUtils.loadTable(mainTableView, exerciseDAO.getAllExercises()));
-        btnCategories.setOnAction(e -> TableUtils.loadTable(mainTableView, categoryDAO.getAllCategories()));
-        btnMuscleGroups.setOnAction(e -> TableUtils.loadTable(mainTableView, muscleGroupDAO.getAllMuscleGroups()));
-        btnSetTemplates.setOnAction(e -> TableUtils.loadTable(mainTableView, setTemplateDAO.getAllSetTemplates()));
+        btnUsers.setOnAction(e -> { TableUtils.loadTable(mainTableView, userDAO.getAllUsers()); tableShown.setText("Table:   Users"); });
+        btnPrograms.setOnAction(e -> { TableUtils.loadTable(mainTableView, programDAO.getAllPrograms()); tableShown.setText("Table:   Programs"); });
+        btnWorkouts.setOnAction(e -> { TableUtils.loadTable(mainTableView, workoutDAO.getAllWorkouts()); tableShown.setText("Table:   Workouts"); });
+        btnWorkoutExercises.setOnAction(e -> { TableUtils.loadTable(mainTableView, workoutExerciseDAO.getAllWorkoutExercises()); tableShown.setText("Table:   Workout Exercises"); });
+        btnWorkoutSets.setOnAction(e -> { TableUtils.loadTable(mainTableView, workoutSetDAO.getAllWorkoutSets()); tableShown.setText("Table:   Workout Sets"); });
+        btnExercises.setOnAction(e -> { TableUtils.loadTable(mainTableView, exerciseDAO.getAllExercises()); tableShown.setText("Table:   Exercises"); });
+        btnCategories.setOnAction(e -> { TableUtils.loadTable(mainTableView, categoryDAO.getAllCategories()); tableShown.setText("Table:   Categories"); });
+        btnMuscleGroups.setOnAction(e -> { TableUtils.loadTable(mainTableView, muscleGroupDAO.getAllMuscleGroups()); tableShown.setText("Table:   Muscle Groups"); });
+        btnSetTemplates.setOnAction(e -> { TableUtils.loadTable(mainTableView, setTemplateDAO.getAllSetTemplates()); tableShown.setText("Table:   Set Templates"); });
 
 
         daoMap = new HashMap<>();
@@ -94,13 +97,42 @@ public class DashboardController {
         
         
         btnAdd.setOnAction(e -> {
-            if (mainTableView != null && !mainTableView.getItems().isEmpty()) {
-                Class<?> clazz = mainTableView.getItems().get(0).getClass();
-                Object dao = daoMap.get(clazz);
-                if (dao != null) {
-                    Object newItem = AddDialogUtils.addWithDialog(clazz);
-                    if (newItem != null) {
-                        AddUtils.add(dao, newItem, mainTableView);
+            if (mainTableView != null) {
+
+                String tableName = tableShown.getText().replace("Table: ", "").trim();
+
+                Class<?> clazz = switch (tableName) {
+                    case "Users" -> User.class;
+                    case "Programs" -> Program.class;
+                    case "Workouts" -> Workout.class;
+                    case "Exercises" -> Exercise.class;
+                    case "Categories" -> Category.class;
+                    case "Muscle Groups" -> MuscleGroup.class;
+                    case "Set Templates" -> SetTemplate.class;
+                    case "Workout Exercises" -> WorkoutExercise.class;
+                    case "Workout Sets" -> WorkoutSet.class;
+                    default -> null;
+                };
+
+                if (clazz != null) {
+                    Object dao = daoMap.get(clazz);
+
+                    if (dao != null) {
+                        Object newItem = AddDialogUtils.addWithDialog(clazz);
+
+                        if (newItem != null) {
+
+                            // ADMIN ID = 20
+                            if (newItem instanceof Program program) {
+                                program.setUserId(20);
+                            }
+
+                            if (newItem instanceof Workout workout) {
+                                workout.setUserId(20);
+                            }
+
+                            AddUtils.add(dao, newItem, mainTableView);
+                        }
                     }
                 }
             }

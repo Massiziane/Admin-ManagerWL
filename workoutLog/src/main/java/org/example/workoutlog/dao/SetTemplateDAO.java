@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.SetTemplate;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 
 public class SetTemplateDAO {
 
     // 🔹 CREATE
     public void addSetTemplate(SetTemplate st) {
-        String sql = "INSERT INTO \"SetTemplate\" (reps, weight, tempo, restTime, type) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO \"SetTemplate\" (reps, weight, tempo, \"restTime\") VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -24,7 +24,6 @@ public class SetTemplateDAO {
             if (st.getWeight() != null) stmt.setDouble(2, st.getWeight()); else stmt.setNull(2, Types.DOUBLE);
             stmt.setString(3, st.getTempo());
             if (st.getRestTime() != null) stmt.setInt(4, st.getRestTime()); else stmt.setNull(4, Types.INTEGER);
-            stmt.setString(5, st.getType());
 
             stmt.executeUpdate();
 
@@ -48,8 +47,7 @@ public class SetTemplateDAO {
                         rs.getObject("reps") != null ? rs.getInt("reps") : null,
                         rs.getObject("weight") != null ? rs.getDouble("weight") : null,
                         rs.getString("tempo"),
-                        rs.getObject("restTime") != null ? rs.getInt("restTime") : null,
-                        rs.getString("type")
+                        rs.getObject("restTime") != null ? rs.getInt("restTime") : null
                 ));
             }
 
@@ -75,8 +73,7 @@ public class SetTemplateDAO {
                             rs.getObject("reps") != null ? rs.getInt("reps") : null,
                             rs.getObject("weight") != null ? rs.getDouble("weight") : null,
                             rs.getString("tempo"),
-                            rs.getObject("restTime") != null ? rs.getInt("restTime") : null,
-                            rs.getString("type")
+                            rs.getObject("restTime") != null ? rs.getInt("restTime") : null
                     );
                 }
             }
@@ -90,7 +87,7 @@ public class SetTemplateDAO {
 
     // 🔹 UPDATE
     public void updateSetTemplate(SetTemplate st) {
-        String sql = "UPDATE \"SetTemplate\" SET reps = ?, weight = ?, tempo = ?, restTime = ?, type = ? WHERE id = ?";
+        String sql = "UPDATE \"SetTemplate\" SET reps = ?, weight = ?, tempo = ?, \"restTime\" = ? WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -99,8 +96,7 @@ public class SetTemplateDAO {
             if (st.getWeight() != null) stmt.setDouble(2, st.getWeight()); else stmt.setNull(2, Types.DOUBLE);
             stmt.setString(3, st.getTempo());
             if (st.getRestTime() != null) stmt.setInt(4, st.getRestTime()); else stmt.setNull(4, Types.INTEGER);
-            stmt.setString(5, st.getType());
-            stmt.setInt(6, st.getId());
+            stmt.setInt(5, st.getId());
 
             stmt.executeUpdate();
 
