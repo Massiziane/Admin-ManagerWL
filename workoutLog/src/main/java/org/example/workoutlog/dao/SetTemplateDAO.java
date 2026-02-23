@@ -13,7 +13,7 @@ import org.example.workoutlog.service.DatabaseConnection;
 
 public class SetTemplateDAO {
 
-    // 🔹 CREATE
+    // CREATE
     public void addSetTemplate(SetTemplate st) {
         String sql = "INSERT INTO \"SetTemplate\" (reps, weight, tempo, \"restTime\") VALUES (?, ?, ?, ?)";
 
@@ -32,7 +32,7 @@ public class SetTemplateDAO {
         }
     }
 
-    // 🔹 READ ALL
+    // READ ALL
     public List<SetTemplate> getAllSetTemplates() {
         List<SetTemplate> list = new ArrayList<>();
         String sql = "SELECT * FROM \"SetTemplate\" ORDER BY id";
@@ -58,7 +58,7 @@ public class SetTemplateDAO {
         return list;
     }
 
-    // 🔹 READ BY ID
+    // READ BY ID
     public SetTemplate getSetTemplateById(int id) {
         String sql = "SELECT * FROM \"SetTemplate\" WHERE id = ?";
 
@@ -85,7 +85,7 @@ public class SetTemplateDAO {
         return null;
     }
 
-    // 🔹 UPDATE
+    // UPDATE
     public void updateSetTemplate(SetTemplate st) {
         String sql = "UPDATE \"SetTemplate\" SET reps = ?, weight = ?, tempo = ?, \"restTime\" = ? WHERE id = ?";
 
@@ -105,7 +105,7 @@ public class SetTemplateDAO {
         }
     }
 
-    // 🔹 DELETE
+    // DELETE
     public void deleteSetTemplate(int id) {
         String sql = "DELETE FROM \"SetTemplate\" WHERE id = ?";
 

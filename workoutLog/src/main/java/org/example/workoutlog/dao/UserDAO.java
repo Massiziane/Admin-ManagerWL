@@ -11,18 +11,34 @@ import org.example.workoutlog.model.User;
 import org.example.workoutlog.service.DatabaseConnection;
 
 public class UserDAO {
-    // Authenticate admin user
+    /**
+     * Authenticates an administrator by verifying username and password.
+     *
+     * This method queries the {@code User} table for a record that matches
+     * the provided credentials and has the role {@code 'ADMIN'} as well as
+     * an active status ({@code isActive = true}). If a matching user is found,
+     * a corresponding {@link User} object is returned; otherwise, {@code null}
+     *
+     * @param username The admin’s username entered at login.
+     * @param password The admin’s password entered at login.
+     * @return A {@link User} object if authentication succeeds, or {@code null} if credentials are invalid.
+     */
     public User authAdmin(String username, String password) {
-       String sql = "SELECT * FROM \"User\" WHERE username = ? AND password = ? AND role = 'ADMIN' AND \"isActive\" = true";
+        // SQL query to verify admin credentials and active status
+        String sql = "SELECT * FROM \"User\" WHERE username = ? AND password = ? AND role = 'ADMIN' AND \"isActive\" = true";
 
+        // Use try-with-resources to ensure DB resources are properly closed
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            // Fill in the placeholders in the prepared statement
             stmt.setString(1, username);
             stmt.setString(2, password);
 
+            // Execute the query and check for a matching admin user
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
+                    // Map the result to a User object and return it
                     return new User(
                         rs.getInt("id"),
                         rs.getString("clerkId"),
@@ -37,10 +53,10 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Log SQL errors to console (production: use a logger)
         }
 
-        return null; // no match
+        return null; // No match found — authentication failed
     }
 
      // CREATE
@@ -100,7 +116,7 @@ public class UserDAO {
         return users;
     }
 
-    //  UPDATE
+    // UPDATE
     public void updateUser(User user) {
         String sql = """
             UPDATE \"User\"

@@ -18,16 +18,8 @@ import javafx.stage.Stage;
  */
 public class WorkoutLog extends Application {
 
-    // Keep a reference to the primary stage so we can switch scenes later
     private static Stage primaryStage;
 
-    /**
-     * JavaFX start method. Called when the application launches.
-     * Loads the initial login/index view and applies CSS styling.
-     *
-     * @param stage the primary stage provided by JavaFX
-     * @throws IOException if the FXML file cannot be loaded
-     */
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage; // store reference to primary stage
@@ -51,14 +43,6 @@ public class WorkoutLog extends Application {
         stage.show();
     }
 
-    /**
-     * Utility method to change the current page/view.
-     * 
-     * Loads a new FXML file and replaces the current scene of the primary stage.
-     * Also reapplies the CSS stylesheet to the new scene.
-     *
-     * @param fxmlPath the path to the FXML file (e.g., "/org/example/workoutlog/assets/views/anotherView.fxml")
-     */
     public static void changePage(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(WorkoutLog.class.getResource(fxmlPath));

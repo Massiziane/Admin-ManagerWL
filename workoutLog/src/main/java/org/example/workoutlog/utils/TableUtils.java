@@ -5,23 +5,38 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class TableUtils {
 
+    /**
+     * Dynamically loads a list of objects into a TableView.
+     * Shows a placeholder label if the list is empty.
+     *
+     * @param tableView The TableView to populate
+     * @param items     The list of objects to display
+     */
     public static void loadTable(TableView<Object> tableView, List<?> items) {
         // Clear previous data and columns
         tableView.getItems().clear();
         tableView.getColumns().clear();
 
-        // Add CSS class for styling
+        // Add a CSS class for styling dynamic tables
         if (!tableView.getStyleClass().contains("dynamic-table")) {
             tableView.getStyleClass().add("dynamic-table");
         }
 
-        if (items.isEmpty()) return;
-
+        if (items.isEmpty()) {
+            Label placeholder = new Label("No data in the DB for this table.");
+            placeholder.setStyle("-fx-text-fill: #333333; -fx-font-size: 16px; -fx-font-weight: bold;");
+            placeholder.setMaxWidth(Double.MAX_VALUE);
+            placeholder.setWrapText(true);
+            placeholder.setAlignment(javafx.geometry.Pos.CENTER);
+            tableView.setPlaceholder(placeholder);
+            return;
+        }
         Object sample = items.get(0);
 
         // Create columns dynamically
@@ -40,21 +55,19 @@ public class TableUtils {
                 }
             });
 
-            // Remove fixed width to allow CONSTRAINED_RESIZE_POLICY to work properly
-            column.setMinWidth(50);      // minimum so it doesn't collapse
-            column.setPrefWidth(150);    // optional, initial sizing
-            column.setResizable(true);   // allow resizing
+            column.setMinWidth(50);
+            column.setPrefWidth(150);
+            column.setResizable(true);
 
             tableView.getColumns().add(column);
         }
 
         tableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
-        // After adding data, apply a simple hack to evenly distribute widths
         ObservableList<Object> data = FXCollections.observableArrayList(items);
         tableView.setItems(data);
 
-        // Force equal width for all columns
+        // Force even column widths
         tableView.widthProperty().addListener((obs, oldVal, newVal) -> {
             int colCount = tableView.getColumns().size();
             if (colCount == 0) return;

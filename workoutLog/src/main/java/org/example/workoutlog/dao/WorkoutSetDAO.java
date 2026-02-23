@@ -16,7 +16,7 @@ import org.example.workoutlog.service.DatabaseConnection;
 
 public class WorkoutSetDAO {
 
-    // 🔹 CREATE
+    // CREATE
     public void addWorkoutSet(WorkoutSet ws) {
         String sql = "INSERT INTO \"WorkoutSet\" (\"order\", setNumber, workoutExerciseId, setTemplateId, reps, weight, tempo, restTime) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -40,7 +40,7 @@ public class WorkoutSetDAO {
         }
     }
 
-    // 🔹 READ ALL
+    // READ ALL
     public List<WorkoutSet> getAllWorkoutSets() {
         List<WorkoutSet> list = new ArrayList<>();
         String sql = "SELECT * FROM \"WorkoutSet\" ORDER BY id";
@@ -70,7 +70,7 @@ public class WorkoutSetDAO {
         return list;
     }
 
-    // 🔹 READ BY ID
+    // READ BY ID
     public WorkoutSet getWorkoutSetById(int id) {
         String sql = "SELECT * FROM \"WorkoutSet\" WHERE id = ?";
 
@@ -101,7 +101,7 @@ public class WorkoutSetDAO {
         return null;
     }
 
-    // 🔹 UPDATE
+    // UPDATE
     public void updateWorkoutSet(WorkoutSet ws) {
         String sql = "UPDATE \"WorkoutSet\" SET \"order\" = ?, setNumber = ?, workoutExerciseId = ?, setTemplateId = ?, reps = ?, weight = ?, tempo = ?, restTime = ? WHERE id = ?";
 
@@ -125,7 +125,7 @@ public class WorkoutSetDAO {
         }
     }
 
-    // 🔹 DELETE
+    // DELETE
     public void deleteWorkoutSet(int id) {
         String sql = "DELETE FROM \"WorkoutSet\" WHERE id = ?";
 

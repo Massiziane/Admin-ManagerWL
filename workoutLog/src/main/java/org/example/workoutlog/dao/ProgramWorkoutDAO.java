@@ -12,7 +12,7 @@ import org.example.workoutlog.model.ProgramWorkout;
 import org.example.workoutlog.service.DatabaseConnection;
 public class ProgramWorkoutDAO {
 
-    // 🔹 CREATE
+    // CREATE
     public void addProgramWorkout(ProgramWorkout pw) {
         String sql = "INSERT INTO \"ProgramWorkout\" (programId, workoutId, \"order\") VALUES (?, ?, ?)";
 
@@ -30,7 +30,7 @@ public class ProgramWorkoutDAO {
         }
     }
 
-    // 🔹 READ ALL
+    // READ ALL
     public List<ProgramWorkout> getAllProgramWorkouts() {
         List<ProgramWorkout> list = new ArrayList<>();
         String sql = "SELECT * FROM \"ProgramWorkout\" ORDER BY id";
@@ -55,7 +55,7 @@ public class ProgramWorkoutDAO {
         return list;
     }
 
-    // 🔹 READ BY ID
+    // READ BY ID
     public ProgramWorkout getProgramWorkoutById(int id) {
         String sql = "SELECT * FROM \"ProgramWorkout\" WHERE id = ?";
 
@@ -81,7 +81,7 @@ public class ProgramWorkoutDAO {
         return null; // Not found
     }
 
-    // 🔹 UPDATE
+    // UPDATE
     public void updateProgramWorkout(ProgramWorkout pw) {
         String sql = "UPDATE \"ProgramWorkout\" SET programId = ?, workoutId = ?, \"order\" = ? WHERE id = ?";
 
@@ -100,7 +100,7 @@ public class ProgramWorkoutDAO {
         }
     }
 
-    // 🔹 DELETE
+    // DELETE
     public void deleteProgramWorkout(int id) {
         String sql = "DELETE FROM \"ProgramWorkout\" WHERE id = ?";
 
