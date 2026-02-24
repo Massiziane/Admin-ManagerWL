@@ -25,6 +25,9 @@ public class DeleteUtils {
             // Refresh TableView if provided
             if (tableView != null) {
                 String getAllMethodName = "getAll" + obj.getClass().getSimpleName() + "s";
+                if (getAllMethodName.equals("getAllCategorys")) {
+                    getAllMethodName = "getAllCategories";
+                }
                 Object data = dao.getClass().getMethod(getAllMethodName).invoke(dao);
                 if (data instanceof java.util.List<?> list) {
                     tableView.getItems().setAll(list);

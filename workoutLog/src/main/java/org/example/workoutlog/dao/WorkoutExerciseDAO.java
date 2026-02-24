@@ -16,7 +16,7 @@ public class WorkoutExerciseDAO {
 
     // CREATE
     public void addWorkoutExercise(WorkoutExercise we) {
-        String sql = "INSERT INTO \"WorkoutExercise\" (\"order\", notes, workoutId, exerciseId) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO \"WorkoutExercise\" (\"order\", notes, \"workoutId\", \"exerciseId\") VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -93,7 +93,7 @@ public class WorkoutExerciseDAO {
 
     // UPDATE
     public void updateWorkoutExercise(WorkoutExercise we) {
-        String sql = "UPDATE \"WorkoutExercise\" SET \"order\" = ?, notes = ?, workoutId = ?, exerciseId = ? WHERE id = ?";
+        String sql = "UPDATE \"WorkoutExercise\" SET \"order\" = ?, notes = ?, \"workoutId\" = ?, |\"exerciseId\" = ? WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
