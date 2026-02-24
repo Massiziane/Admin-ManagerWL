@@ -4,6 +4,8 @@ public class MuscleGroup {
     private int id;
     private String name;
 
+    public MuscleGroup() {}
+
     public MuscleGroup(int id, String name) {
         this.id = id;
         this.name = name;

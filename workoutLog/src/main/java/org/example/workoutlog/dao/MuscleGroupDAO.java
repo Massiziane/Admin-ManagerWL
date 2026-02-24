@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.MuscleGroup;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 
 public class MuscleGroupDAO {
 
-    // 🔹 CREATE
+    //  CREATE
     public void addMuscleGroup(MuscleGroup muscleGroup) {
         String sql = "INSERT INTO \"MuscleGroup\" (name) VALUES (?)";
 
@@ -28,7 +28,7 @@ public class MuscleGroupDAO {
         }
     }
 
-    // 🔹 READ ALL
+    //  READ ALL
     public List<MuscleGroup> getAllMuscleGroups() {
         List<MuscleGroup> list = new ArrayList<>();
         String sql = "SELECT * FROM \"MuscleGroup\" ORDER BY id";
@@ -51,7 +51,7 @@ public class MuscleGroupDAO {
         return list;
     }
 
-    // 🔹 READ BY ID
+    //  READ BY ID
     public MuscleGroup getMuscleGroupById(int id) {
         String sql = "SELECT * FROM \"MuscleGroup\" WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -74,7 +74,7 @@ public class MuscleGroupDAO {
         return null; // Not found
     }
 
-    // 🔹 UPDATE
+    //  UPDATE
     public void updateMuscleGroup(MuscleGroup muscleGroup) {
         String sql = "UPDATE \"MuscleGroup\" SET name = ? WHERE id = ?";
 
@@ -91,7 +91,7 @@ public class MuscleGroupDAO {
         }
     }
 
-    // 🔹 DELETE
+    //  DELETE
     public void deleteMuscleGroup(int id) {
         String sql = "DELETE FROM \"MuscleGroup\" WHERE id = ?";
 

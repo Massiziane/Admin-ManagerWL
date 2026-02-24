@@ -7,6 +7,8 @@ public class Workout {
     private Integer frequency;
     private int userId;
 
+    public Workout() {}
+
     public Workout(int id, String name, Integer order,
                    Integer frequency, int userId) {
         this.id = id;

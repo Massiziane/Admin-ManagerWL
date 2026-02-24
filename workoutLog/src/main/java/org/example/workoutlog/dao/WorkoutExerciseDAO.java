@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.WorkoutExercise;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 
 public class WorkoutExerciseDAO {
 
-    // 🔹 CREATE
+    // CREATE
     public void addWorkoutExercise(WorkoutExercise we) {
         String sql = "INSERT INTO \"WorkoutExercise\" (\"order\", notes, workoutId, exerciseId) VALUES (?, ?, ?, ?)";
 
@@ -38,7 +38,7 @@ public class WorkoutExerciseDAO {
         }
     }
 
-    // 🔹 READ ALL
+    // READ ALL
     public List<WorkoutExercise> getAllWorkoutExercises() {
         List<WorkoutExercise> list = new ArrayList<>();
         String sql = "SELECT * FROM \"WorkoutExercise\" ORDER BY id";
@@ -64,7 +64,7 @@ public class WorkoutExerciseDAO {
         return list;
     }
 
-    // 🔹 READ BY ID
+    // READ BY ID
     public WorkoutExercise getWorkoutExerciseById(int id) {
         String sql = "SELECT * FROM \"WorkoutExercise\" WHERE id = ?";
 
@@ -91,7 +91,7 @@ public class WorkoutExerciseDAO {
         return null; // Not found
     }
 
-    // 🔹 UPDATE
+    // UPDATE
     public void updateWorkoutExercise(WorkoutExercise we) {
         String sql = "UPDATE \"WorkoutExercise\" SET \"order\" = ?, notes = ?, workoutId = ?, exerciseId = ? WHERE id = ?";
 
@@ -116,7 +116,7 @@ public class WorkoutExerciseDAO {
         }
     }
 
-    // 🔹 DELETE
+    // DELETE
     public void deleteWorkoutExercise(int id) {
         String sql = "DELETE FROM \"WorkoutExercise\" WHERE id = ?";
 

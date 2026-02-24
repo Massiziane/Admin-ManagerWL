@@ -6,6 +6,8 @@ public class ProgramWorkout {
     private int workoutId;
     private int order;
 
+    public ProgramWorkout() {}
+
     public ProgramWorkout(int id, int programId,
                           int workoutId, int order) {
         this.id = id;

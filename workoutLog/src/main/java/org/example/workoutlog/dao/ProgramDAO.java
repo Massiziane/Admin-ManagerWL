@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.Program;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 
 public class ProgramDAO {
 
-    // 🔹 CREATE
+    //  CREATE
     public void addProgram(Program program) {
-        String sql = "INSERT INTO \"Program\" (name, Desc, userId) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO \"Program\" (name, \"Desc\", \"userId\", \"updatedAt\") VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -31,7 +31,7 @@ public class ProgramDAO {
         }
     }
 
-    // 🔹 READ ALL
+    //  READ ALL
     public List<Program> getAllPrograms() {
         List<Program> programs = new ArrayList<>();
         String sql = "SELECT * FROM \"Program\" ORDER BY id";
@@ -56,7 +56,7 @@ public class ProgramDAO {
         return programs;
     }
 
-    // 🔹 READ BY ID
+    //  READ BY ID
     public Program getProgramById(int id) {
         String sql = "SELECT * FROM \"Program\" WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -81,10 +81,9 @@ public class ProgramDAO {
         return null; // Not found
     }
 
-    // 🔹 UPDATE
+    // UPDATE
     public void updateProgram(Program program) {
-        String sql = "UPDATE \"Program\" SET name = ?, Desc = ?, userId = ? WHERE id = ?";
-
+        String sql = "UPDATE \"Program\" SET name = ?, \"Desc\" = ?, \"userId\" = ?, \"updatedAt\" = CURRENT_TIMESTAMP WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -100,7 +99,7 @@ public class ProgramDAO {
         }
     }
 
-    // 🔹 DELETE
+    //  DELETE
     public void deleteProgram(int id) {
         String sql = "DELETE FROM \"Program\" WHERE id = ?";
 

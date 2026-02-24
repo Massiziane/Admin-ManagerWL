@@ -7,6 +7,8 @@ public class WorkoutExercise {
     private int workoutId;
     private int exerciseId;
 
+    public WorkoutExercise() {}
+
     public WorkoutExercise(int id, Integer order, String notes,
                            int workoutId, int exerciseId) {
         this.id = id;

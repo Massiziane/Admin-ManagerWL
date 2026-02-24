@@ -1,0 +1,49 @@
+/* Dynamic Table Styles */
+.dynamic-table {
+    -fx-background-color: #f5f5f5;          /* Light gray background */
+    -fx-border-color: #ddd;                  /* Subtle border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-padding: 5px;
+    -fx-table-cell-border-color: transparent; /* Remove inner borders */
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Table header styling */
+.dynamic-table .column-header {
+    -fx-background-color: #007ACC;         /* Blue header */
+    -fx-text-fill: white;                   /* White text */
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;                  /* Center text */
+    -fx-border-width: 0 0 1px 0;            /* Subtle bottom line */
+    -fx-border-color: #005A9E;
+}
+
+/* Row hover effect */
+.dynamic-table .table-row-cell:hover {
+    -fx-background-color: #e1f0ff;          /* Light blue on hover */
+}
+
+/* Alternate row colors */
+.dynamic-table .table-row-cell:odd {
+    -fx-background-color: #ffffff;
+}
+
+.dynamic-table .table-row-cell:even {
+    -fx-background-color: #f9f9f9;
+}
+
+/* Cell alignment for numeric values */
+.dynamic-table .table-cell {
+    -fx-padding: 5px;
+    -fx-alignment: CENTER_LEFT;   
+}
+
+/* Optional: center numeric values dynamically */
+.dynamic-table .table-cell.numeric-cell {
+    -fx-alignment: CENTER_RIGHT;
+}
+
+
+

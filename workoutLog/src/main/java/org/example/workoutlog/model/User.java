@@ -10,6 +10,8 @@ public class User {
     private String role;
     private boolean isActive;
 
+    public User() {}
+
     public User(int id, String clerkId, String firstName, String lastName,
                 String username, String email, String role, boolean isActive) {
         this.id = id;

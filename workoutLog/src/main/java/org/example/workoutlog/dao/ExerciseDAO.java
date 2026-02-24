@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.workoutlog.model.Exercise;
-import org.example.workoutlog.utils.DatabaseConnection;
+import org.example.workoutlog.service.DatabaseConnection;
 
 
 public class ExerciseDAO {
 
-    // 🔹 CREATE
+    //  CREATE
     public void addExercise(Exercise exercise) {
         String sql = "INSERT INTO \"Exercise\" (name, notes, categoryId, muscleGroupId) VALUES (?, ?, ?, ?)";
 
@@ -41,7 +41,7 @@ public class ExerciseDAO {
         }
     }
 
-    // 🔹 READ ALL
+    //  READ ALL
     public List<Exercise> getAllExercises() {
         List<Exercise> exercises = new ArrayList<>();
         String sql = "SELECT * FROM \"Exercise\" ORDER BY id";
@@ -67,7 +67,7 @@ public class ExerciseDAO {
         return exercises;
     }
 
-    // 🔹 READ BY ID
+    //  READ BY ID
     public Exercise getExerciseById(int id) {
         String sql = "SELECT * FROM \"Exercise\" WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -93,7 +93,7 @@ public class ExerciseDAO {
         return null; // Not found
     }
 
-    // 🔹 UPDATE
+    //  UPDATE
     public void updateExercise(Exercise exercise) {
         String sql = "UPDATE \"Exercise\" SET name = ?, notes = ?, categoryId = ?, muscleGroupId = ? WHERE id = ?";
 
@@ -121,7 +121,7 @@ public class ExerciseDAO {
         }
     }
 
-    // 🔹 DELETE
+    // DELETE
     public void deleteExercise(int id) {
         String sql = "DELETE FROM \"Exercise\" WHERE id = ?";
 

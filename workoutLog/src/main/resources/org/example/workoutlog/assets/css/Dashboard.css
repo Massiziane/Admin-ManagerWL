@@ -1,81 +1,251 @@
-/* Root pane */
-.anchor-pane {
-    -fx-background-color: #f4f4f4; /* light gray background */
+/* ================= ROOT ================= */
+
+.root {
+    -fx-font-family: "Segoe UI", "Arial";
 }
 
-/* Header label */
-.label {
-    -fx-text-fill: #2c3e50; /* dark gray text */
-    -fx-font-weight: bold;
+/* ================= HEADER ================= */
+
+#headerBar {
+    -fx-background-color: linear-gradient(to right, #0b1b38, #2a5298);
+    -fx-padding: 20;
+    -fx-alignment: CENTER_LEFT;
 }
 
-/* Top logout button */
-#logoutButton {
-    -fx-background-color: #e74c3c; /* red */
+#headerBar .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+    -fx-font-size: 28px;
+}
+
+/* Logout Button */
+#logoutButton {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
     -fx-cursor: hand;
+    -fx-padding: 8 16 8 16;
 }
 
 #logoutButton:hover {
-    -fx-background-color: #c0392b; /* darker red */
+    -fx-background-color: #c82333;
 }
 
-/* Left menu buttons (tables) */
-VBox > Button {
-    -fx-background-color: #34495e; /* dark blue/gray */
+/* ================= SIDEBAR ================= */
+
+#sideBar {
+    -fx-background-color: #1e3c72;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-pref-width: 220;
+}
+
+/* Sidebar title */
+.sidebar-title {
+    -fx-text-fill: rgb(216, 215, 215);
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-size: 35px;
+    -fx-font-weight: bolder;
+    -ms-flex-align: center;
+}
+
+/* Sidebar buttons */
+#sideBar .button {
+    -fx-background-color: #2557b3;
     -fx-text-fill: white;
-    -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+    -fx-background-radius: 6;
+    -fx-padding: 10 12 10 12;
     -fx-cursor: hand;
 }
 
-VBox > Button:hover {
-    -fx-background-color: #2c3e50; /* darker shade */
+#sideBar .button:hover {
+    -fx-background-color: rgba(3, 24, 56, 0.15);
 }
 
-/* CRUD buttons (ADD, EDIT, DELETE) */
-HBox > Button {
-    -fx-background-color: #27ae60; /* green */
+/* ================= CONTENT AREA ================= */
+
+#contentArea {
+    -fx-background-color: #f4f6f8;
+    -fx-padding: 25;
+    -fx-spacing: 20;
+}
+
+/* ================= ACTION BAR ================= */
+
+#actionBar {
+    -fx-spacing: 15;
+}
+
+/* ADD Button */
+#btnAdd {
+    -fx-background-color: #28a745;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20 10 20;
     -fx-cursor: hand;
 }
 
-HBox > Button:hover {
-    -fx-background-color: #219150; /* darker green */
+#btnAdd:hover {
+    -fx-background-color: #218838;
+}
+
+/* EDIT Button */
+#btnEdit {
+    -fx-background-color: #ffc107;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20 10 20;
+    -fx-cursor: hand;
+}
+
+#btnEdit:hover {
+    -fx-background-color: #e0a800;
+}
+
+/* DELETE Button */
+#btnDelete {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20 10 20;
+    -fx-cursor: hand;
+}
+
+#btnDelete:hover {
+    -fx-background-color: #c82333;
+}
+
+/* ================= TABLE ================= */
+
+.table-view {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #dddddd;
+    -fx-padding: 5;
+}
+
+/* Table Header Background */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to right, #2a5298, #1e3c72);
+}
+
+/* Header text */
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Alternating row colors */
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-row-cell:even {
+    -fx-background-color: white;
+}
+
+/* Selected row */
+.table-row-cell:filled:selected {
+    -fx-background-color: #00bfff;
+    -fx-text-fill: white;
+}
+
+/* Remove default blue focus border */
+.table-view:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 /* TableView styling */
-.table-view {
+#mainTableView {
     -fx-background-color: white;
-    -fx-border-color: #bdc3c7; /* light border */
-    -fx-border-width: 1;
-    -fx-table-cell-border-color: #ecf0f1;
-    -fx-font-size: 14px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #dddddd;
+    -fx-padding: 5;
 }
 
-.table-view .column-header {
-    -fx-background-color: #3498db; /* blue headers */
+/* Table header background */
+#mainTableView .column-header-background {
+    -fx-background-color: linear-gradient(to right, #2a5298, #1e3c72);
+}
+
+/* Table header text */
+#mainTableView .column-header .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
 
-.table-view .column-header-background {
-    -fx-background-color: #3498db;
+/* Alternating row colors */
+#mainTableView .table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
 }
 
-.table-view .table-row-cell:filled:selected, 
-.table-view .table-row-cell:focused:selected {
-    -fx-background-color: #d1f2eb; /* light teal for selected row */
+#mainTableView .table-row-cell:even {
+    -fx-background-color: white;
 }
 
-.table-view .table-row-cell:hover {
-    -fx-background-color: #ecf0f1; /* light hover effect */
+/* Selected row */
+#mainTableView .table-row-cell:filled:selected {
+    -fx-background-color: #00bfff;
+    -fx-text-fill: white;
+}
+
+/* Remove default blue focus outline */
+#mainTableView:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+/* Table label above table */
+#tableShown {
+    -fx-text-fill: black;  
+    -fx-font-size: 18px;     
+    -fx-font-weight: bold;      
+    -fx-background-color: #f0f0f0; 
+    -fx-padding: 6px 10px;      
+    -fx-border-color: #ccc;  
+    -fx-border-radius: 5px;   
+    -fx-background-radius: 5px;
+}
+#tabletitle {
+    -fx-font-size: 24px;     
+    -fx-font-weight: bold;      
+    -fx-background-color: #f0f0f0; 
+    -fx-padding: 6px 10px;      
+    -fx-border-color: #ccc;  
+    -fx-border-radius: 5px;   
+    -fx-background-radius: 5px;
+    -fx-flex-align: center;
+}
+
+/* Help button styling */
+#helpBtn {
+    -fx-background-color: #4a90e2;   
+    -fx-text-fill: white;           
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 8 20 8 20;        
+    -fx-background-radius: 8px;    
+    -fx-cursor: hand;              
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2); 
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect */
+#helpBtn:hover {
+    -fx-background-color: #357ab8; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 3);
+}
+
+/* Pressed effect */
+#helpBtn:pressed {
+    -fx-background-color: #2c5d91;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
 }
