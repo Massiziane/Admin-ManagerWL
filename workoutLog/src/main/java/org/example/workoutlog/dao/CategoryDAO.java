@@ -14,7 +14,7 @@ import org.example.workoutlog.service.DatabaseConnection;
  * Data Access Object (DAO) for managing {@link Category} records in the database.
  *
  * This class handles CRUD operations (Create, Read, Update, Delete)
- * for the {@code Category} table using JDBC. It also ensures that when
+ * for the { Category} table using JDBC. It also ensures that when
  * a category is deleted, all exercises linked to it are reassigned
  * to a fallback category.
  */
@@ -22,8 +22,6 @@ public class CategoryDAO {
 
     /**
      * Retrieves all categories from the database.
-     *
-     * @return A list of all {@link Category} objects, ordered by ID.
      */
     public List<Category> getAllCategories() {
         List<Category> list = new ArrayList<>();
@@ -70,8 +68,6 @@ public class CategoryDAO {
 
     /**
      * Updates an existing category’s name and description in the database.
-     *
-     * @param category The {@link Category} object containing updated data.
      */
     public void updateCategory(Category category) {
         String sql = "UPDATE \"Category\" SET name = ?, \"Desc\" = ? WHERE id = ?";
@@ -88,16 +84,8 @@ public class CategoryDAO {
         }
     }
 
-    /**
-     * Deletes a category from the database and reassigns related exercises
-     * to a fallback category.
-     *
-     * Before deletion, all exercises that reference the category being deleted
-     * will be updated to belong to a default (fallback) category. This prevents
-     * orphaned records in the {@code Exercise} table.
-     *
-     * @param id The ID of the category to delete.
-     */
+
+     // Delete
     public void deleteCategory(int id) {
         // Set the fallback category ID (the one named "Exercises")
         final int fallbackCategoryId = 28; // ID of default/fallback category

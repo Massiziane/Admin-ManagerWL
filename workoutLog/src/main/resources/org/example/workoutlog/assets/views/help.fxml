@@ -11,10 +11,10 @@
 
     <Label text="Admin Guidance" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
-    <Label text="Whenever you are prompted to enter any ID, always make sure that the ID of the table exists." 
+    <Label text="Whenever you are prompted to enter any ID, always make sure that the ID is valid." 
            wrapText="true" style="-fx-font-size: 14px;" />
 
-    <Label text="Whenever you are prompted to enter a user ID, always use the admin ID (20) for testing purposes." 
+    <Label text="Whenever you are prompted to enter a user ID, always use the admin ID (20) for traceability purposes." 
            wrapText="true" style="-fx-font-size: 14px;" />
 
     <Button text="Close" fx:id="btnClose" />

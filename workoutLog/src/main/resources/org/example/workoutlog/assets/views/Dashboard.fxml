@@ -14,7 +14,6 @@
     <top>
         <HBox fx:id="headerBar" alignment="CENTER_LEFT" spacing="20">
             <children>
-
                 <HBox HBox.hgrow="ALWAYS">
                <children>
                       <Label text="Workout Log : DATA Manager">
@@ -23,7 +22,6 @@
                           </font>
                       </Label>
                </children></HBox>
-
                 <Button fx:id="logoutButton" text="Log out" />
             </children>
         </HBox>

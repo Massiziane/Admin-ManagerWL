@@ -14,16 +14,13 @@ public class TableUtils {
     /**
      * Dynamically loads a list of objects into a TableView.
      * Shows a placeholder label if the list is empty.
-     *
-     * @param tableView The TableView to populate
-     * @param items     The list of objects to display
      */
     public static void loadTable(TableView<Object> tableView, List<?> items) {
         // Clear previous data and columns
         tableView.getItems().clear();
         tableView.getColumns().clear();
 
-        // Add a CSS class for styling dynamic tables
+        // CSS 
         if (!tableView.getStyleClass().contains("dynamic-table")) {
             tableView.getStyleClass().add("dynamic-table");
         }

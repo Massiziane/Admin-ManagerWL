@@ -17,11 +17,7 @@ public class UserDAO {
      * This method queries the {@code User} table for a record that matches
      * the provided credentials and has the role {@code 'ADMIN'} as well as
      * an active status ({@code isActive = true}). If a matching user is found,
-     * a corresponding {@link User} object is returned; otherwise, {@code null}
-     *
-     * @param username The admin’s username entered at login.
-     * @param password The admin’s password entered at login.
-     * @return A {@link User} object if authentication succeeds, or {@code null} if credentials are invalid.
+     * a corresponding {@link User} object is returned; otherwise, invalid.
      */
     public User authAdmin(String username, String password) {
         // SQL query to verify admin credentials and active status
@@ -53,7 +49,7 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace(); // Log SQL errors to console (production: use a logger)
+            e.printStackTrace(); 
         }
 
         return null; // No match found — authentication failed
@@ -63,8 +59,8 @@ public class UserDAO {
     public void addUser(User user) {
         String sql = """
             INSERT INTO "User" 
-            (clerkId, firstName, lastName, username, email, role, isActive)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (\"clerkId\", \"firstName\", \"lastName\", username, email, role, \"isActive\", \"updatedAt\")
+        VALUES (?, ?, ?, ?, ?, ?::\"Role\", ?, CURRENT_TIMESTAMP)
         """;
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -120,8 +116,8 @@ public class UserDAO {
     public void updateUser(User user) {
         String sql = """
             UPDATE \"User\"
-            SET firstName = ?, lastName = ?, username = ?, 
-                email = ?, role = ?, isActive = ?
+            SET \"firstName\" = ?, \"lastName\" = ?, username = ?, 
+                email = ?, role = ?::\"Role\", \"isActive\" = ?, \"updatedAt\" = CURRENT_TIMESTAMP
             WHERE id = ?
         """;
 

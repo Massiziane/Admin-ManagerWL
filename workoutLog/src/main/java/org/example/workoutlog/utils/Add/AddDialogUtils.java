@@ -29,10 +29,6 @@ public class AddDialogUtils {
      * {@code "id"}. When the user clicks "Add", the input values are parsed and
      * set on the object using Java reflection. Supports String, int/double, and
      * boolean field types.
-     *
-     * @param clazz The model class type (e.g., {@code User.class}, {@code Category.class})
-     * @param <T> The generic type of the model class
-     * @return A fully populated instance of type {@code T}, or {@code null} if cancelled or error
      */
     public static <T> T addWithDialog(Class<T> clazz) {
         try {
@@ -123,11 +119,7 @@ public class AddDialogUtils {
 
     /**
      * Converts the first character of a string to uppercase for label display.
-     *
      * <p>Example: {@code "username"} → {@code "Username"}</p>
-     *
-     * @param str The input string to capitalize
-     * @return Capitalized string, or original if null/empty
      */
     private static String capitalize(String str) {
         if (str == null || str.isEmpty()) return str;

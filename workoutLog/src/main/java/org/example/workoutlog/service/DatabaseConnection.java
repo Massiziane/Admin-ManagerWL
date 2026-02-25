@@ -19,9 +19,6 @@ public class DatabaseConnection {
     /**
      * Returns a new Connection object to the database.
      * Each call returns a fresh connection, which should be closed after use.
-     *
-     * @return Connection to the Neon PostgreSQL database
-     * @throws SQLException if a database access error occurs
      */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL);

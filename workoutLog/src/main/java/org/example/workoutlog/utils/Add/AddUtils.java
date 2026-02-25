@@ -33,7 +33,6 @@ public class AddUtils {
                     tableView.getItems().setAll(list);  // refresh with updated data
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -220,9 +220,6 @@ public class DashboardController {
         });
     }
 
-    /**
-     * Logs out the current user and returns to the login/index page.
-     */
     private void logout() {
         WorkoutLog.changePage("/org/example/workoutlog/assets/views/index.fxml");
     }
