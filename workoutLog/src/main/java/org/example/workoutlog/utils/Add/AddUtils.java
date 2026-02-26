@@ -10,11 +10,6 @@ public class AddUtils {
 
     /**
      * Adds an object to the database using its DAO and refreshes the TableView if provided.
-     *
-     * @param dao       The DAO containing the appropriate add method (e.g., CategoryDAO)
-     * @param obj       The object to insert into the database
-     * @param tableView Optional TableView to refresh after insertion (can be null)
-     * @param <T>       The type of the model object
      */
     public static <T> void add(Object dao, T obj, TableView<Object> tableView) {
         try {

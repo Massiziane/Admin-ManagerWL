@@ -34,6 +34,7 @@ public class TableUtils {
             tableView.setPlaceholder(placeholder);
             return;
         }
+        
         Object sample = items.get(0);
 
         // Create columns dynamically

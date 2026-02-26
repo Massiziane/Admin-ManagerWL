@@ -17,27 +17,14 @@ import javafx.scene.control.TextField;
  * {@link UserDAO}, and navigates to the dashboard if the login is successful.
  */
 public class IndexController {
-
-    /** Text field for entering the username. */
     @FXML
     private TextField usernameField;
 
-    /** Password field for entering the password. */
     @FXML
     private PasswordField passwordField;
-
-    /**
-     * Handles the login button action.
-     *
-     * This method retrieves the input values from the username and password
-     * fields, verifies the credentials through the {@link UserDAO#authAdmin(String, String)}  
-     * method, and performs one of two actions:
-     *     If authentication is successful, it redirects to the dashboard view.</li>
-     *     If authentication fails, it displays an error alert to the user.
-     */
     @FXML
     private void login() {
-        // Retrieve entered username and password
+
         String username = usernameField.getText();
         String password = passwordField.getText();
 

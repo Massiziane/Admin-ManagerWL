@@ -6,6 +6,9 @@ import java.util.List;
 
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 
@@ -14,10 +17,6 @@ public class EditDialogUtils {
     /**
      * Opens a dialog to edit all fields of the given object, except the "id" field.
      * Uses reflection to dynamically populate the dialog with TextFields.
-     *
-     * @param obj The object to edit
-     * @param <T> The type of the object
-     * @return The updated object if "Save" is pressed, otherwise null
      */
     public static <T> T editWithDialog(T obj) {
         try {
@@ -31,10 +30,12 @@ public class EditDialogUtils {
 
             // Prepare lists to hold reflected fields and corresponding TextField inputs
             List<Field> fieldList = new ArrayList<>();
-            List<TextField> inputList = new ArrayList<>();
+            List<Control> inputList = new ArrayList<>();
 
             // Create the GridPane form using EditDialogHelper
-            dialog.getDialogPane().setContent(EditDialogHelper.createGridPane(obj, fieldList, inputList));
+            dialog.getDialogPane().setContent(
+                EditDialogHelper.createGridPane(obj, fieldList, inputList)
+            );
 
             // Convert dialog input into the updated object when "Save" is clicked
             dialog.setResultConverter(dialogButton -> {
@@ -42,20 +43,33 @@ public class EditDialogUtils {
                     try {
                         for (int i = 0; i < fieldList.size(); i++) {
                             Field field = fieldList.get(i);
-                            String text = inputList.get(i).getText();
+                            Control control = inputList.get(i);
                             Class<?> type = field.getType();
 
+                            Object value = null;
+
                             // Convert string input to appropriate type before setting the field
-                            if (type == int.class || type == Integer.class) {
-                                field.set(obj, Integer.parseInt(text));
-                            } else if (type == double.class || type == Double.class) {
-                                field.set(obj, Double.parseDouble(text));
-                            } else if (type == boolean.class || type == Boolean.class) {
-                                field.set(obj, Boolean.parseBoolean(text));
-                            } else {
-                                field.set(obj, text); // default to String
+                            if (control instanceof TextField tf) {
+                                String text = tf.getText();
+
+                                if (type == int.class || type == Integer.class) {
+                                    value = Integer.parseInt(text);
+                                } else if (type == double.class || type == Double.class) {
+                                    value = Double.parseDouble(text);
+                                } else {
+                                    value = text; // default to String
+                                }
                             }
+                            else if (control instanceof ComboBox<?> cb) {
+                                value = cb.getValue();
+                            }
+                            else if (control instanceof CheckBox chk) {
+                                value = chk.isSelected();
+                            }
+
+                            field.set(obj, value);
                         }
+
                         return obj; // return updated object
                     } catch (Exception e) {
                         e.printStackTrace(); // log any errors during conversion

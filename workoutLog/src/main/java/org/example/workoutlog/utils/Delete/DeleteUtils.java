@@ -6,10 +6,6 @@ public class DeleteUtils {
 
     /**
      * Deletes an object using its DAO and refreshes the TableView.
-     * @param dao DAO instance (must have deleteX(int id) and getAllX() methods)
-     * @param obj Object to delete (must have getId() method)
-     * @param tableView TableView to refresh (can be null)
-     * @param <T> Model type
      */
     public static <T> void delete(Object dao, T obj, TableView<Object> tableView) {
         if (obj == null || dao == null) return;

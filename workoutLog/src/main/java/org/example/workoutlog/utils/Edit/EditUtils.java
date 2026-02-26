@@ -6,11 +6,6 @@ public class EditUtils {
 
     /**
      * Updates an object in the database using its DAO and refreshes a TableView.
-     *
-     * @param dao       The DAO instance that has an update method (e.g., CategoryDAO)
-     * @param obj       The object to update
-     * @param tableView Optional TableView to refresh after update (can be null)
-     * @param <T>       The type of the object
      */
     public static <T> void edit(Object dao, T obj, TableView<Object> tableView) {
         try {

@@ -6,6 +6,9 @@ import java.util.List;
 
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,14 +25,6 @@ import javafx.scene.layout.Priority;
  */
 public class AddDialogUtils {
 
-    /**
-     * Opens a generic "Add" dialog for the specified model class.
-     *
-     * The dialog dynamically generates TextField inputs for all fields except
-     * {@code "id"}. When the user clicks "Add", the input values are parsed and
-     * set on the object using Java reflection. Supports String, int/double, and
-     * boolean field types.
-     */
     public static <T> T addWithDialog(Class<T> clazz) {
         try {
             // Create a new instance of the model class using default constructor
@@ -54,7 +49,7 @@ public class AddDialogUtils {
 
             // Lists to track field mappings and their corresponding input controls
             List<Field> fieldList = new ArrayList<>();
-            List<TextField> inputList = new ArrayList<>();
+            List<Control> inputList = new ArrayList<>();
 
             // Dynamically generate input fields for each non-ID field
             for (Field field : fields) {
@@ -63,16 +58,54 @@ public class AddDialogUtils {
 
                 // Create label and input field for current property
                 Label label = new Label(capitalize(field.getName()) + ":");
-                TextField input = new TextField();
 
-                // Add to grid layout (label in column 0, input in column 1)
-                grid.add(label, 0, row);
-                grid.add(input, 1, row);
-                GridPane.setHgrow(input, Priority.ALWAYS); // Make input fields expand horizontally
+                // Special case for "role" field → show dropdown instead of TextField
+                if (field.getName().equalsIgnoreCase("role")) {
 
-                // Store field/input pairs for later processing
-                fieldList.add(field);
-                inputList.add(input);
+                    ComboBox<String> comboBox = new ComboBox<>();
+                    comboBox.getItems().addAll("USER", "ADMIN");
+                    comboBox.setValue("USER");
+
+                    // Add to grid layout (label in column 0, input in column 1)
+                    grid.add(label, 0, row);
+                    grid.add(comboBox, 1, row);
+                    GridPane.setHgrow(comboBox, Priority.ALWAYS);
+
+                    // Store field/input pairs for later processing
+                    fieldList.add(field);
+                    inputList.add(comboBox);
+                }
+
+                // Special case for boolean fields → show CheckBox
+                else if (field.getType() == boolean.class || field.getType() == Boolean.class) {
+
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.setSelected(true);
+
+                    // Add to grid layout (label in column 0, input in column 1)
+                    grid.add(label, 0, row);
+                    grid.add(checkBox, 1, row);
+
+                    // Store field/input pairs for later processing
+                    fieldList.add(field);
+                    inputList.add(checkBox);
+                }
+
+                // Default case → TextField
+                else {
+
+                    TextField input = new TextField();
+
+                    // Add to grid layout (label in column 0, input in column 1)
+                    grid.add(label, 0, row);
+                    grid.add(input, 1, row);
+                    GridPane.setHgrow(input, Priority.ALWAYS); // Make input fields expand horizontally
+
+                    // Store field/input pairs for later processing
+                    fieldList.add(field);
+                    inputList.add(input);
+                }
+
                 row++;
             }
 
@@ -86,20 +119,33 @@ public class AddDialogUtils {
                         // Iterate through all field/input pairs and set values
                         for (int i = 0; i < fieldList.size(); i++) {
                             Field field = fieldList.get(i);
-                            String text = inputList.get(i).getText();
+                            Control control = inputList.get(i);
                             Class<?> type = field.getType();
 
-                            // Parse input based on field type using reflection
-                            if (type == int.class || type == Integer.class) {
-                                field.set(newObj, Integer.parseInt(text));
-                            } else if (type == double.class || type == Double.class) {
-                                field.set(newObj, Double.parseDouble(text));
-                            } else if (type == boolean.class || type == Boolean.class) {
-                                field.set(newObj, Boolean.parseBoolean(text));
-                            } else {
-                                field.set(newObj, text); // Default to String
+                            Object value = null;
+
+                            if (control instanceof TextField tf) {
+                                String text = tf.getText();
+
+                                // Parse input based on field type using reflection
+                                if (type == int.class || type == Integer.class) {
+                                    value = Integer.parseInt(text);
+                                } else if (type == double.class || type == Double.class) {
+                                    value = Double.parseDouble(text);
+                                } else {
+                                    value = text; // Default to String
+                                }
                             }
+                            else if (control instanceof ComboBox<?> cb) {
+                                value = cb.getValue();
+                            }
+                            else if (control instanceof CheckBox chk) {
+                                value = chk.isSelected();
+                            }
+
+                            field.set(newObj, value);
                         }
+
                         return newObj; // Return populated object
                     } catch (Exception e) {
                         e.printStackTrace(); // Handle parsing errors

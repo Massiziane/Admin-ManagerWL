@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Utility class for managing database connections.
  * Provides a centralized method to get a JDBC connection to the PostgreSQL database.
  */
 public class DatabaseConnection {
@@ -26,7 +25,6 @@ public class DatabaseConnection {
 
     /**
      * Simple test method to verify that the database connection works.
-     * Prints a success message if the connection is established.
      */
     public static void main(String[] args) {
         try (Connection conn = getConnection()) { // Try-with-resources ensures connection is closed automatically
