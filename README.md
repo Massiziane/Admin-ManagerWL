@@ -1,6 +1,6 @@
 # WorkoutLog Manager
 
-**WorkoutLog Manager** est une application de bureau JavaFX destinée aux administrateurs, permettant la gestion et la manipulation des données liées à l’entraînement.  
+**WorkoutLog Manager** est une application de bureau JavaFX destinée aux administrateurs, permettant la gestion et la manipulation des données liées à WorkoutLog web app : https://workoutlog-c5r8.onrender.com.  
 Elle offre une interface claire et complète pour consulter, modifier et manipuler toutes les informations du système.
 
 ## Fonctionnalités
